@@ -10,18 +10,24 @@ object Form1: TForm1
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OldCreateOrder = True
   OnShow = FormShow
+  PixelsPerInch = 96
   DesignSize = (
     589
     334)
-  PixelsPerInch = 96
   TextHeight = 15
+  object Label1: TLabel
+    Left = 24
+    Top = 8
+    Width = 34
+    Height = 15
+    Caption = 'Label1'
+  end
   object Memo1: TMemo
     Left = 24
-    Top = 24
+    Top = 40
     Width = 417
-    Height = 289
+    Height = 273
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       'Memo1')
@@ -40,7 +46,7 @@ object Form1: TForm1
   end
   object Button2: TButton
     Left = 464
-    Top = 24
+    Top = 40
     Width = 105
     Height = 41
     Anchors = [akTop, akRight]

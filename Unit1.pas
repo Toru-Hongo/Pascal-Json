@@ -12,6 +12,7 @@ type
     Memo1: TMemo;
     Button1: TButton;
     Button2: TButton;
+    Label1: TLabel;
     procedure Button1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Button2Click(Sender: TObject);
@@ -137,6 +138,7 @@ begin
   Text := 'Json File R/W Demo ver 1.0';
   Button1.Caption := 'Write Json';
   Button2.Caption := 'Read Json';
+  Label1.Caption  := 'Hello';
 
 end;
 
