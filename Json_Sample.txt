@@ -1,0 +1,97 @@
+/
+//  Delphi Json
+//
+https://arigayas.exblog.jp/29884377/
+
+
+uses に「System.JSON」を追加しないとJSONを扱えないので注意です。
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  JSON, JSON_Form, JSON_LoopList_Node: TJSONObject;
+  JSONArray_LoopList: TJSONArray;
+  I: Integer;
+  number: string;
+  SLJson: TStringList; // ファイル保存
+begin
+  JSON := TJSONObject.Create; // 一番大きな箱を作成
+  JSON_Form := TJSONObject.Create; // ウィンドウサイズと位置の箱を作成
+  JSONArray_LoopList := TJSONArray.Create; // LoopList 全データを入れた箱を作成
+  SLJson := TStringList.Create; // ファイル保存
+
+  try
+    begin
+      JSON_Form.AddPair('Top', Form1.Top.ToString);
+      JSON_Form.AddPair('Left', Form1.Left.ToString);
+      JSON_Form.AddPair('WindowWidth', Form1.Width.ToString);
+      JSON_Form.AddPair('WindowHeight', Form1.Height.ToString);
+      Memo1.Lines.Add(JSON_Form.ToString);
+      Memo1.Lines.Add('----------------');
+      JSON.AddPair('Form', JSON_Form);
+      JSON.AddPair('LoopList', JSONArray_LoopList);
+      for I := 1 to 32 - 1 do  // サンプルデータ作成
+      begin
+        // LoopList の1行分のデータの箱を作成する必要がある。
+        // ひとかたまりを作る前にCreateを実行しないと繋がったデータになってしまう。
+        JSON_LoopList_Node := TJSONObject.Create;
+
+        number := Format('%.4d', [I]);
+        JSON_LoopList_Node.AddPair('ID', number);
+        JSON_LoopList_Node.AddPair('GruopID', Random(3).ToString);
+        JSON_LoopList_Node.AddPair('Item', 'John Smith');
+        JSON_LoopList_Node.AddPair('Day', Random(30).ToString + '日');
+        JSON_LoopList_Node.AddPair('Time', '12:00');
+        JSON_LoopList_Node.AddPair('backgroundColor', 'White');
+
+        JSONArray_LoopList.Add(JSON_LoopList_Node);
+
+//        Memo1.Lines.Add('-----');
+//        Memo1.Lines.Add(JSON.ToString);
+      end;
+
+      Memo1.Lines.Add('----------------');
+      Memo1.Lines.Add(JSON.ToString);
+
+      // JSONファイルに保存する処理。
+      SLJson.Text := JSON_Form.ToString;
+      SLJson.SaveToFile('test.json', TEncoding.UTF8);
+    end;
+  finally
+     JSON.Free;
+  end;
+end;
+
+
+
+
+上記で定義したクラスに対で、冒頭で示した内容のJson形式の定義ファイルCoffeeShop.Jsonを読み込み、
+デシリアライズする処理は、以下のとおりとなります。
+
+
+procedure TForm1.Button2Click(Sender: TObject);  
+var  
+  CoffeeShop : TCoffeeShop;  
+  serializer: TJsonSerializer;  
+  s : string;  
+  Clerk : TClerk;  
+begin  
+  
+  s := TFile.ReadAllText('CoffeeShop.Json',TEncoding.UTF8);  
+  
+  serializer := TJsonSerializer.Create;  
+  try  
+    CoffeeShop := serializer.Deserialize<TCoffeeShop>(s);  
+    try  
+      Memo1.Clear;  
+      Memo1.Lines.Add(CoffeeShop.ShopName);  
+      for Clerk in CoffeeShop.Clerks do  
+      begin  
+        Memo1.Lines.Add(Clerk.Name + '(' + Clerk.Age.ToString() + ')');  
+      end;  
+    finally  
+      CoffeeShop.Clerks.Clear();  
+      CoffeeShop.Free;  
+    end;  
+  finally  
+    serializer.Free  
+  end;  
