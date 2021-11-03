@@ -1,0 +1,24 @@
+https://udemy.benesse.co.jp/development/system/git-three-steps.html
+
+GitとGitHubの違い、そしてそれぞれの使い方について解説します。
+
+Gitとはソースコードなどの変更履歴を管理するバージョン管理システムのことです。
+一方、GitHubはGitで管理しているファイルなどのデータをオンライン上で共有・管理できるサービスのことです。
+
+GitHubはソースコードの共有、管理以外にもチーム開発の助けとなる機能が充実しています。
+例えば「プルリクエスト」はコードレビュー機能となっており、
+自分以外の開発者に修正した内容を確認してもらうことができます。
+
+Gitではそれぞれのパソコンで開発の作業をおこなうことができ、
+GitHubではオンライン上に公開されたソースコードを管理、修正などができます。
+
+
+
+Gitのサンプル
+
+Toru Hongo
+toru_hongo@hotmail.com
+
+mkdir tutorial
+
+しかし、GitHUB は hongo.toru@gmail.com 
