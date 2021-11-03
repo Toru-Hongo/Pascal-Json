@@ -1,3 +1,13 @@
+//------------------------------------------------------------
+//
+// Json file sample projects
+//
+//
+//
+// copyright 2021.11 Toru Hongo
+//
+
+
 unit Unit1;
 
 interface
